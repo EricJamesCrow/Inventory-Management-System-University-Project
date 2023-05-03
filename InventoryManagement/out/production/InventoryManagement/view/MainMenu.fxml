@@ -3,9 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <children>
-      <Button fx:id="testButton" layoutX="280.0" layoutY="188.0" mnemonicParsing="false" onAction="#onClicked" text="Button" />
-      <Label fx:id="label" layoutX="277.0" layoutY="158.0" prefWidth="60.0" text="Count: 0" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionCreateAnimal" prefWidth="61.33" text="CREATE" />
+            <Button layoutX="141.0" layoutY="97.0" mnemonicParsing="false" onAction="#onActionDisplayAnimal" text="DISPLAY" />
+            <Button layoutX="139.0" layoutY="110.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionExit" prefWidth="61.333" text="EXIT" />
+         </children></VBox>
    </children>
 </AnchorPane>
