@@ -35,8 +35,11 @@
                   <TextField fx:id="animalpriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <RadioButton fx:id="vaccYesRBtn" mnemonicParsing="false" text="Yes" />
-                        <RadioButton fx:id="vaccNoRBtn" mnemonicParsing="false" text="No" />
+                        <RadioButton fx:id="vaccYesRBtn" mnemonicParsing="false" text="Yes">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="vaccTG" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="vaccNoRBtn" mnemonicParsing="false" text="No" toggleGroup="$vaccTG" />
                      </children>
                   </HBox>
                </children>

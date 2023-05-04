@@ -1,31 +1,40 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
 
-    public int count = 1;
-    public Label label;
+    Stage stage;
+    Parent scene;
 
-    public void onClicked(ActionEvent actionEvent) {
-        label.setText("Count: " + count++);
+    public void onActionCreateAnimal(ActionEvent actionEvent) throws IOException {
+
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/CreateAnimalMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
-    public void onActionCreateAnimal(ActionEvent actionEvent) {
-        System.out.println("Create button clicked.");
-    }
+    public void onActionDisplayAnimal(ActionEvent actionEvent) throws IOException {
 
-    public void onActionDisplayAnimal(ActionEvent actionEvent) {
-        System.out.println("Display button clicked.");
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/DisplayAnimalsMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     public void onActionExit(ActionEvent actionEvent) {
-        System.out.println("Exit button clicked.");
+        System.exit(0);
     }
 
     @Override
