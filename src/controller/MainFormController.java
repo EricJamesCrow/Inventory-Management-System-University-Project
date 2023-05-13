@@ -18,23 +18,76 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * this class is a controller for the MainForm view.
+ * It contains the methods onActionSearchParts, onActionSearchProducts,
+ * onActionDisplayAddPart, onActionDisplayAddProduct, onActionDisplayModifyPart,
+ * onActionDisplayModifyProduct, onActionDeletePart, onActionDeleteProduct,
+ * onActionExit, and initialize
+ */
 public class MainFormController implements Initializable {
-
+    /**
+     * TableView element for the gui
+     */
     public TableView<Part> partsTableView;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> partIdCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, String> partNameCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> partInventoryLevelCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Double> partPriceCol;
+    /**
+     * TableView element for the gui
+     */
     public TableView<Product> productsTableView;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Product, Integer> productIdCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Product, String> productNameCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Product, Integer> productInventoryLevelCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Product, Double> productPriceCol;
+    /**
+     * TextField element for the gui
+     */
     public TextField partSearchField;
+    /**
+     * TextField element for the gui
+     */
     public TextField productSearchField;
+    /**
+     * the stage the application is running in
+     */
     Stage stage;
+    /**
+     * the ui to be displayed
+     */
     Parent scene;
-    public void onActionSearchParts(ActionEvent actionEvent) throws  IOException {
+    /**
+     * method for the search field for the parts table view.
+     * it is triggered after a user enters a value and then presses enter.
+     * if there are no parts found, an error dialogue box appears.
+     */
+    public void onActionSearchParts() {
         if(partSearchField.getText().matches("[0-9]+")) {
             Part part = Inventory.lookupPart(Integer.parseInt(partSearchField.getText()));
             if(part == null) {
@@ -60,7 +113,12 @@ public class MainFormController implements Initializable {
             }
         }
     }
-    public void onActionSearchProducts(ActionEvent actionEvent) throws IOException {
+    /**
+     * method for the search field for the products table view.
+     * it is triggered after a user enters a value and then presses enter.
+     * if there are no products found, an error dialogue box appears.
+     */
+    public void onActionSearchProducts() {
         if(productSearchField.getText().matches("[0-9]+")) {
             Product product = Inventory.lookupProduct(Integer.parseInt(productSearchField.getText()));
             if(product == null) {
@@ -86,13 +144,24 @@ public class MainFormController implements Initializable {
             }
         }
     }
+    /**
+     * triggered when the add button under the parts pane is clicked.
+     * brings up and sends part data to the AddPartForm view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayAddPart(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AddPartForm.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**
+     * triggered when the modify button under the parts pane is clicked.
+     * brings up and sends part data to the ModifyPartForm view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayModifyPart(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -106,7 +175,7 @@ public class MainFormController implements Initializable {
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
             stage.show();
-            /** RUNTIME ERROR: Had to use catch NullPointerException for when there is nothing selected to modify **/
+            /** RUNTIME ERROR: Had to use catch NullPointerException for when there is nothing selected to modify */
         } catch(NullPointerException e) {
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
             alert2.setContentText("Must select a part to modify");
@@ -114,6 +183,12 @@ public class MainFormController implements Initializable {
         }
     }
 
+    /**
+     * triggered when the add button under the products pane is clicked.
+     * brings up the AddProductForm view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayAddProduct(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AddProductForm.fxml"));
@@ -121,6 +196,12 @@ public class MainFormController implements Initializable {
         stage.show();
     }
 
+    /**
+     * triggered when the modify button under products pane is clicked.
+     * brings up and sends product data to the ModifyProductForm view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayModifyProduct(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -136,12 +217,17 @@ public class MainFormController implements Initializable {
             stage.show();
         } catch(NullPointerException e) {
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
-            alert2.setContentText("Must select a part to modify");
+            alert2.setContentText("Must select a product to modify");
             alert2.showAndWait();
         }
     }
-
-    public void onActionDeletePart(ActionEvent actionEvent) throws IOException {
+    /**
+     * triggered when the delete button is clicked under the parts pane.
+     * a confirmation pops up confirming the user wants to delete the part
+     * and a logical error check is performed to see if the part is successfully
+     * deleted.
+     */
+    public void onActionDeletePart() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete this part?");
         alert.setTitle("Delete");
         Optional<ButtonType> result = alert.showAndWait();
@@ -159,7 +245,14 @@ public class MainFormController implements Initializable {
         }
     }
 
-    public void onActionDeleteProduct(ActionEvent actionEvent) throws IOException {
+    /**
+     * triggered when the delete button is clicked under the products pane.
+     * a confirmation pops up confirming the user wants to delete the product
+     * and a logical error check is performed for whether the product has
+     * associated parts and if the product was able to be successfully
+     * deleted.
+     */
+    public void onActionDeleteProduct() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete this product?");
         alert.setTitle("Delete");
         Optional<ButtonType> result = alert.showAndWait();
@@ -184,11 +277,19 @@ public class MainFormController implements Initializable {
         }
     }
 
-
-    public void onActionExit(ActionEvent actionEvent) {
+    /**
+     * triggered when the exit button is clicked.
+     * closes the application.
+     */
+    public void onActionExit() {
         System.exit(0);
     }
 
+    /**
+     * initializes the controller by populating the table views
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTableView.setItems(Inventory.getAllParts());

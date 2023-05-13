@@ -1,9 +1,7 @@
 package controller;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,36 +12,86 @@ import model.Part;
 import model.inHouse;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class ModifyPartFormController implements Initializable {
+/**
+ * This class is a controller for the ModifyPartForm view.
+ * It contains the methods onActionDisplayMenu, onActionSaveModifiedPart,
+ * onRadioButtonSelected, and sendPart
+ */
+public class ModifyPartFormController {
+    /**
+     * the stage the application is running in
+     */
     Stage stage;
+    /**
+     * the ui to be displayed
+     */
     Parent scene;
+    /**
+     * RadioButton element for the gui
+     */
     public RadioButton inHouseBtn;
+    /**
+     * RadioButton element for the gui
+     */
     public RadioButton outsourcedBtn;
+    /**
+     * Label element for the gui
+     */
     public Label companyNameMachineIdLabel;
+    /**
+     * TextField element for the gui
+     */
     public TextField id;
+    /**
+     * TextField element for the gui
+     */
     public TextField name;
+    /**
+     * TextField element for the gui
+     */
     public TextField inv;
+    /**
+     * TextField element for the gui
+     */
     public TextField price;
+    /**
+     * TextField element for the gui
+     */
     public TextField max;
+    /**
+     * TextField element for the gui
+     */
     public TextField companyNameMachineIdTextField;
+    /**
+     * TextField element for the gui
+     */
     public TextField min;
+    /**
+     * Button element for the gui
+     */
     public Button addPartSaveBtn;
+    /**
+     * Button element for the gui
+     */
     public Button addPartCancelBtn;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
+    /**
+     * this method is triggered when the cancel button is clicked.
+     * it returns the user to the main menu.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayMenu(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
+    /**
+     * this method is triggered when the save button is clicked.
+     * it performs error checks and then adds the modified part to the inventory.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionSaveModifiedPart(ActionEvent actionEvent) throws IOException {
         try {
             int partId = Integer.parseInt(id.getText());
@@ -148,7 +196,11 @@ public class ModifyPartFormController implements Initializable {
         }
     }
 
-    public void onRadioButtonSelected(ActionEvent actionEvent) {
+    /**
+     * this method is triggered when the radio button is changed.
+     * it changes which text is set for the companyNameMachineIdLabel in the gui.
+     */
+    public void onRadioButtonSelected() {
         if(inHouseBtn.isSelected()) {
             companyNameMachineIdLabel.setText("Machine ID");
         } else if (outsourcedBtn.isSelected()) {
@@ -156,6 +208,11 @@ public class ModifyPartFormController implements Initializable {
         }
     }
 
+    /**
+     * MainFormController.onActionDisplayModifyPart() calls this function to send the selected item
+     * to ModifyPartForm's view
+     * @param part
+     */
     public void sendPart(Part part) {
         id.setText(String.valueOf(part.getId()));
         name.setText(part.getName());

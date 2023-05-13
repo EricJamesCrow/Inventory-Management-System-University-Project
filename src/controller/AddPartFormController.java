@@ -3,7 +3,6 @@ package controller;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,24 +13,63 @@ import model.Part;
 import model.inHouse;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class AddPartFormController implements Initializable {
+/**
+ * This class is a controller for the AddPartForm view.
+ * It contains the methods onActionPartSaved, onRadioButtonSelected,
+ * onActionDisplayMenu, and initialize
+ */
+public class AddPartFormController {
+    /**
+     * the stage the application is running in
+     */
     Stage stage;
+    /**
+     * the ui to be displayed
+     */
     Parent scene;
-
+    /**
+     * TextField element for the gui
+     */
     public TextField name;
+    /**
+     * TextField element for the gui
+     */
     public TextField inv;
+    /**
+     * TextField element for the gui
+     */
     public TextField price;
+    /**
+     * TextField element for the gui
+     */
     public TextField max;
+    /**
+     * TextField element for the gui
+     */
     public TextField companyNameMachineIdTextField;
+    /**
+     * TextField element for the gui
+     */
     public TextField min;
+    /**
+     * RadioButton element for the gui
+     */
     public RadioButton inHouseBtn;
+    /**
+     * RadioButton element for the gui
+     */
     public RadioButton outsourcedBtn;
+    /**
+     * Label element for the gui
+     */
     public Label companyNameMachineIdLabel;
 
-    public void onRadioButtonSelected(ActionEvent actionEvent) {
+    /**
+     * this method is triggered when the radio button is changed.
+     * it changes which text is set for the companyNameMachineIdLabel in the gui.
+     */
+    public void onRadioButtonSelected() {
         if(inHouseBtn.isSelected()) {
             companyNameMachineIdLabel.setText("Machine ID");
         } else if (outsourcedBtn.isSelected()) {
@@ -39,6 +77,12 @@ public class AddPartFormController implements Initializable {
         }
     }
 
+    /**
+     * this method is triggered when the save button is clicked.
+     * it performs error checks and then adds the newly created part to the inventory.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionPartSaved(ActionEvent actionEvent) throws IOException {
         try {
             ObservableList<Part> allParts = Inventory.getAllParts();
@@ -141,11 +185,12 @@ public class AddPartFormController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        
-    }
-
+    /**
+     * this method is triggered when the cancel button is clicked.
+     * it returns the user to the main menu.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayMenu(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));

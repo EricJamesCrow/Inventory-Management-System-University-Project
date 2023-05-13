@@ -12,33 +12,100 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is a controller for the AddProductForm view.
+ * It contains the methods initialize, onActionAddAssociatedPart,
+ * onActionRemoveAssociatedPart, onActionProductSaved, onActionSearchParts,
+ * and onActionDisplayMenu
+ */
 public class AddProductFormController implements Initializable {
+    /**
+     * TextField element for the gui
+     */
     public TextField name;
+    /**
+     * TextField element for the gui
+     */
     public TextField inv;
+    /**
+     * TextField element for the gui
+     */
     public TextField price;
+    /**
+     * TextField element for the gui
+     */
     public TextField max;
+    /**
+     * TextField element for the gui
+     */
     public TextField min;
+    /**
+     * TableView element for the gui
+     */
     public TableView<Part> partsTableView;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> partIdCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, String> partNameCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> partInventoryLevelCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Double> partPriceCol;
+    /**
+     * TextField element for the gui
+     */
     public TextField partSearchField;
+    /**
+     * TableView element for the gui
+     */
     public TableView<Part> associatedPartsTableView;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> associatedPartIdCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, String> associatedPartNameCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Integer> associatedPartInventoryLevelCol;
+    /**
+     * TableColumn element for the gui
+     */
     public TableColumn<Part, Double> associatedPartPriceCol;
+    /**
+     * the stage the application is running in
+     */
     Stage stage;
+    /**
+     * the ui to be displayed
+     */
     Parent scene;
+    /**
+     * an ObservableList for the associated parts for product.
+     */
     private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
+    /**
+     * this method initializes the controller by populating the table views.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTableView.setItems(Inventory.getAllParts());
@@ -53,13 +120,22 @@ public class AddProductFormController implements Initializable {
         associatedPartInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         associatedPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
-    public void onActionAddAssociatedPart(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * method for the add button under the parts table view.
+     * adds the part to the associated parts table view.
+     */
+    public void onActionAddAssociatedPart()  {
         Part associatedPart = partsTableView.getSelectionModel().getSelectedItem();
         if(associatedPart != null) {
             associatedParts.add(associatedPart);
         }
     }
-    public void onActionRemoveAssociatedPart(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * method for removing an associated part from the associated parts table view.
+     */
+    public void onActionRemoveAssociatedPart() {
         if(associatedPartsTableView.getSelectionModel().getSelectedItem() == null) {
             // if no part is selected, nothing happens
             return;
@@ -72,7 +148,12 @@ public class AddProductFormController implements Initializable {
             associatedParts.remove(partsTableView.getSelectionModel().getSelectedItem());
         }
     }
-
+    /**
+     * this method is triggered when the save button is clicked.
+     * it performs error checks and then adds the newly created product to the inventory.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionProductSaved(ActionEvent actionEvent) throws IOException {
         try {
             ObservableList<Product> allProducts = Inventory.getAllProducts();
@@ -156,7 +237,13 @@ public class AddProductFormController implements Initializable {
             alert.showAndWait();
         }
     }
-    public void onActionSearchParts(ActionEvent actionEvent) throws  IOException {
+
+    /**
+     * method for the search field for the parts table view.
+     * it is triggered after a user enters a value and then presses enter.
+     * if there are no parts found, an error dialogue box appears.
+     */
+    public void onActionSearchParts() {
         if(partSearchField.getText().matches("[0-9]+")) {
             Part part = Inventory.lookupPart(Integer.parseInt(partSearchField.getText()));
             if(part == null) {
@@ -182,7 +269,12 @@ public class AddProductFormController implements Initializable {
             }
         }
     }
-
+    /**
+     * this method is triggered when the cancel button is clicked.
+     * it returns the user to the main menu.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionDisplayMenu(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
