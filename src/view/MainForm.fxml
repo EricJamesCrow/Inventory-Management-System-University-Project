@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <Label layoutX="28.0" layoutY="27.0" prefHeight="20.0" prefWidth="210.0" text="Inventory Management System">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitBtn" layoutX="734.0" layoutY="360.0" mnemonicParsing="false" text="Exit" onAction="#onActionExit"/>
+      <Pane layoutX="22.0" layoutY="57.0" prefHeight="285.0" prefWidth="392.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <TableView fx:id="partsTableView" layoutX="8.0" layoutY="41.0" prefHeight="204.0" prefWidth="376.0">
+              <columns>
+                <TableColumn fx:id="partIdCol" prefWidth="75.0" text="Part ID" />
+                <TableColumn fx:id="partNameCol" prefWidth="75.0" text="Part Name" />
+                  <TableColumn fx:id="partInventoryLevelCol" prefWidth="106.33335876464844" text="Inventory Level" />
+                  <TableColumn fx:id="partPriceCol" prefWidth="117.33334350585938" text="Price/Cost Per Unit" />
+              </columns>
+            </TableView>
+            <Label layoutX="24.0" layoutY="24.0" text="Parts">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="partSearchField" onAction="#onActionSearchParts" layoutX="214.0" layoutY="16.0" promptText="Search by Part ID or Name" />
+            <HBox alignment="CENTER" layoutX="178.0" layoutY="246.0" prefHeight="37.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="partsAddBtn" mnemonicParsing="false" text="Add" onAction="#onActionDisplayAddPart"/>
+                  <Button fx:id="partsModifyBtn" mnemonicParsing="false" text="Modify" onAction="#onActionDisplayModifyPart"/>
+                  <Button fx:id="partsDeleteBtn" mnemonicParsing="false" text="Delete" onAction="#onActionDeletePart"/>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane layoutX="436.0" layoutY="57.0" prefHeight="285.0" prefWidth="392.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <TableView fx:id="productsTableView" layoutX="8.0" layoutY="41.0" prefHeight="204.0" prefWidth="376.0">
+               <columns>
+                  <TableColumn fx:id="productIdCol" prefWidth="75.0" text="Product ID" />
+                  <TableColumn fx:id="productNameCol" prefWidth="75.0" text="Product Name" />
+                  <TableColumn fx:id="productInventoryLevelCol" prefWidth="106.33335876464844" text="Inventory Level" />
+                  <TableColumn fx:id="productPriceCol" prefWidth="117.33334350585938" text="Price/Cost Per Unit" />
+               </columns>
+            </TableView>
+            <Label layoutX="24.0" layoutY="24.0" text="Products">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="productSearchField" onAction="#onActionSearchProducts" layoutX="214.0" layoutY="16.0" promptText="Search by Product ID or Name" />
+            <HBox alignment="CENTER" layoutX="178.0" layoutY="246.0" prefHeight="37.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="productsAddBtn" mnemonicParsing="false" text="Add" onAction="#onActionDisplayAddProduct"/>
+                  <Button fx:id="productsModifyBtn" mnemonicParsing="false" text="Modify" onAction="#onActionDisplayModifyProduct"/>
+                  <Button fx:id="productsDeleteBtn" mnemonicParsing="false" text="Delete" onAction="#onActionDeleteProduct"/>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
