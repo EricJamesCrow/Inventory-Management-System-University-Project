@@ -61,4 +61,4 @@ The application incorporates error handling and input validation, providing desc
 
 Here is a GIF demonstrating the functioning of the application:
 
-![App Demo](URL_to_your_GIF)
+![]([URL_to_your_GIF](https://raw.githubusercontent.com/EricJamesCrow/School-Project---Inventory-Management/main/images/inventoryManagementDemo.gif?token=GHSAT0AAAAAAB4LRH7KXF7PIKKIOVFGRJEYZDAI7UQ))
