@@ -1,4 +1,10 @@
+
 # University Project - Object-Oriented Application Development
+## Demonstration
+
+Here is a GIF demonstrating the functioning of the application:
+
+![](https://raw.githubusercontent.com/EricJamesCrow/School-Project---Inventory-Management/main/images/inventoryManagementDemo.gif?token=GHSAT0AAAAAAB4LRH7KXF7PIKKIOVFGRJEYZDAI7UQ)
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -9,7 +15,6 @@
 - [User Interface](#user-interface)
 - [Application](#application)
 - [Error Handling and Input Validation](#error-handling-and-input-validation)
-- [Demonstration](#demonstration)
 
 ## Introduction
 
@@ -56,9 +61,3 @@ The application consists of several classes that map to a UML class diagram. It 
 ## Error Handling and Input Validation
 
 The application incorporates error handling and input validation, providing descriptive error messages for various circumstances such as when minimum inventory level is more than maximum, when a product with an associated part is attempted to be deleted, and when inappropriate data is entered in forms.
-
-## Demonstration
-
-Here is a GIF demonstrating the functioning of the application:
-
-![](https://raw.githubusercontent.com/EricJamesCrow/School-Project---Inventory-Management/main/images/inventoryManagementDemo.gif?token=GHSAT0AAAAAAB4LRH7KXF7PIKKIOVFGRJEYZDAI7UQ)
